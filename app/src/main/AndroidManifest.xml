@@ -3,6 +3,7 @@
     package="com.aai.camera2demo">
 
     <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,13 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Camera2Activity">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Camera2Activity" />
+        <activity android:name=".RecognizeActivity" />
+        <activity
+            android:name=".FarmingEvents"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_farming_events"
+            android:theme="@style/FullscreenTheme" />
     </application>
 
 </manifest>

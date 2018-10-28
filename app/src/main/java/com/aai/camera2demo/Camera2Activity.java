@@ -24,7 +24,9 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.nio.ByteBuffer;
@@ -51,6 +53,8 @@ public class Camera2Activity extends AppCompatActivity implements View.OnClickLi
     private SurfaceHolder mSurfaceHolder;
 
     private ImageView iv_show;
+    private TextView tv_category, tv_name, tv_alias, tv_english_name;
+    private ImageButton ib_takephoto_cancel;
     private Handler childHandler;
     private ImageReader mImageReader;
     private CameraCaptureSession mCameraCaptureSession;
@@ -64,10 +68,25 @@ public class Camera2Activity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void initView() {
+
         iv_show = findViewById(R.id.iv_show_camera2_activity);
+        tv_category = findViewById(R.id.tv_category);
+        tv_name = findViewById(R.id.tv_name);
+        tv_alias = findViewById(R.id.tv_alias);
+        tv_english_name = findViewById(R.id.tv_english_name);
+
+        iv_show.setVisibility(View.GONE);
+        tv_category.setVisibility(View.GONE);
+        tv_name.setVisibility(View.GONE);
+        tv_alias.setVisibility(View.GONE);
+        tv_english_name.setVisibility(View.GONE);
+
+        ib_takephoto_cancel = findViewById(R.id.ib_takephoto_cancel);
+        ib_takephoto_cancel.setImageResource(R.drawable.ic_photo_camera_black_24dp);
+        ib_takephoto_cancel.setOnClickListener(this);
         // mSurfaceView
         mSurfaceView = findViewById(R.id.surface_view_camera2_activity);
-        mSurfaceView.setOnClickListener(this);
+//        mSurfaceView.setOnClickListener(this);
         mSurfaceHolder = mSurfaceView.getHolder();
         mSurfaceHolder.setKeepScreenOn(true);
         // mSurfaceView add callback
@@ -80,14 +99,13 @@ public class Camera2Activity extends AppCompatActivity implements View.OnClickLi
 
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
+                Toast.makeText(Camera2Activity.this, "surfaceChanged", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
                 // release camera resource
                 if (null != mCameraDevice) {
-                    Toast.makeText(Camera2Activity.this, "close camera surfaceDestroyed", Toast.LENGTH_SHORT).show();
                     mCameraDevice.close();
                     Camera2Activity.this.mCameraDevice = null;
                 }
@@ -113,7 +131,7 @@ public class Camera2Activity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onImageAvailable(ImageReader reader) {
                 mCameraDevice.close();
-                mSurfaceView.setVisibility(View.GONE);
+//                mSurfaceView.setVisibility(View.GONE);
                 iv_show.setVisibility(View.VISIBLE);
                 // get photo bitmap
                 Image image = reader.acquireNextImage();
@@ -122,8 +140,16 @@ public class Camera2Activity extends AppCompatActivity implements View.OnClickLi
                 buffer.get(bytes);
                 final Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
                 if (bitmap != null) {
-                    Log.d("hackathon5", bitmap.toString());
                     iv_show.setImageBitmap(bitmap);
+                    tv_category.setText("害虫啊");
+                    tv_name.setText("蚜虫");
+                    tv_alias.setText("坏蚜虫");
+                    tv_english_name.setText("bad aphid");
+                    tv_category.setVisibility(View.VISIBLE);
+                    tv_name.setVisibility(View.VISIBLE);
+                    tv_alias.setVisibility(View.VISIBLE);
+                    tv_english_name.setVisibility(View.VISIBLE);
+                    ib_takephoto_cancel.setVisibility(View.GONE);
                 }
             }
         }, mainHandler);

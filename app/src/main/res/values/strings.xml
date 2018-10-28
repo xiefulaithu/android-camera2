@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">Camera2Demo</string>
+    <string name="app_name">Hackathon5 - Farming</string>
+
+    <string name="title_activity_farming_events">FarmingEvents</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_recognize_pests_and_diseases">识病虫</string>
+    <string name="title_expert_help">问专家</string>
+    <string name="title_trends_pests_and_diseases">灾情趋势</string>
+    <string name="title_record_farming_events">农事记账</string>
+    <string name="title_activity_expert_help">ExpertHelp</string>
 </resources>
